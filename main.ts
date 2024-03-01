@@ -1,5 +1,8 @@
 let mySprite: Sprite = null
 let Weapon: Sprite = null
+let ammunition = 0
+let mags = 0
+let textSprite: TextSprite = null
 function StartUp () {
     mySprite = Render.getRenderSpriteVariable()
     Render.moveWithController(2, 3, 2)
@@ -125,7 +128,7 @@ function StartUp () {
         bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
         bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
         `)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(15, 16))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(15, 14))
     tiles.setCurrentTilemap(tilemap`level1`)
     Weapon = sprites.create(img`
         ........................................
@@ -169,4 +172,10 @@ function StartUp () {
         ............ffccccfffccccff.............
         ............ffccccfffccccff.............
         `, SpriteKind.Player)
+    Weapon.changeScale(3, ScaleAnchor.Middle)
+    mySprite.setPosition(80, 98)
+    mySprite.setFlag(SpriteFlag.RelativeToCamera, true)
+    ammunition = 12
+    mags = ammunition * 5
+    textSprite = textsprite.create("" + convertToText(ammunition) + "/" + convertToText(mags), 8, 1)
 }
