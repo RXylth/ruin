@@ -1,16 +1,18 @@
+function reload () {
+    while (ammunition != 12) {
+        mags += -1
+        ammunition += 1
+        ammo()
+    }
+}
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    reload()
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     shoot()
 })
 function shoot () {
     if (ammunition != 0) {
-        projectile = sprites.createProjectileFromSprite(img`
-            4 4 4 4 4 4 
-            4 4 4 4 4 4 
-            4 4 4 4 4 4 
-            4 4 4 4 4 4 
-            4 4 4 4 4 4 
-            4 4 4 4 4 4 
-            `, Render.getRenderSpriteVariable(), Render.getAttribute(Render.attribute.dirX) * 200, Render.getAttribute(Render.attribute.dirY) * 200)
         music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
         animation.runImageAnimation(
         Weapon,
@@ -223,6 +225,14 @@ function shoot () {
         50,
         false
         )
+        projectile = sprites.createProjectileFromSprite(img`
+            4 4 4 4 4 4 
+            4 4 4 4 4 4 
+            4 4 4 4 4 4 
+            4 4 4 4 4 4 
+            4 4 4 4 4 4 
+            4 4 4 4 4 4 
+            `, Render.getRenderSpriteVariable(), Render.getAttribute(Render.attribute.dirX) * 200, Render.getAttribute(Render.attribute.dirY) * 200)
         ammunition += -1
         ammo()
     }
@@ -409,10 +419,10 @@ function StartUp () {
     textSprite = textsprite.create("" + convertToText(ammunition) + "/" + convertToText(mags), 8, 1)
 }
 let mySprite: Sprite = null
-let mags = 0
 let textSprite: TextSprite = null
-let Weapon: Sprite = null
 let projectile: Sprite = null
+let Weapon: Sprite = null
+let mags = 0
 let ammunition = 0
 StartUp()
 ammo()
